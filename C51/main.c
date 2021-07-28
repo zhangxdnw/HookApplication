@@ -15,7 +15,47 @@
   * 03
   */
 
+#define COMMAND_LENGTH 3
+
+
+typedef struct MESSAGE
+{
+  unsigned char[COMMAND_LENGTH] command_data;
+  struct message * next;
+} message
+
+message * iterator = NULL;
+
+/***
+  * 初始化函数
+  */
+void init()
+{
+ 
+}
+
+void execute(unsigned char command[COMMAND_LENGTH])
+{
+ 
+}
+
+/***
+  * 主函数
+  */
 void main()
 {
-  
+  init();
+  while(1)
+  {
+    if(iterator!=NULL && iterator->next != NULL)
+    {
+      message * message = iterator->next;
+      execute(message);
+      iterator = iterator->next;
+    }
+    else
+    {
+      //sleep
+    }
+  }
 }
