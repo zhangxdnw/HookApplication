@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    07/31/2021  18:23:48  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    07/31/2021  18:32:32  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
@@ -59,7 +59,7 @@ LINK MAP OF MODULE:  .\Objects\stc8g2k64s4 (?C_STARTUP)
                     00A6H     075AH                  *** GAP ***
             CODE    0800H     0229H     UNIT         ?C?LIB_CODE
             CODE    0A29H     008CH     UNIT         ?C_C51STARTUP
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:23:48  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:32:32  PAGE 2
 
 
             CODE    0AB5H     008AH     UNIT         ?PR?UART1_ISR?MAIN
@@ -119,7 +119,7 @@ SEGMENT                                DATA_GROUP
   +--> ?PR?ADD_MESSAGE_TO_LIST?MAIN
 
 ?PR?ADD_MESSAGE_TO_LIST?MAIN         0032H    000BH
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:23:48  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:32:32  PAGE 3
 
 
 
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\stc8g2k64s4 (?C_STARTUP)
   B:00A8H.4       PUBLIC        ES
   D:00B8H         PUBLIC        IP
   B:0098H.0       PUBLIC        RI
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:23:48  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:32:32  PAGE 4
 
 
   B:0098H.1       PUBLIC        TI
@@ -220,31 +220,31 @@ SYMBOL TABLE OF MODULE:  .\Objects\stc8g2k64s4 (?C_STARTUP)
   C:0B3FH         PUBLIC        _execute
   D:00D0H         PUBLIC        PSW
   -------         PROC          UART_1_INIT
-  C:0E2FH         LINE#         34
   C:0E2FH         LINE#         35
   C:0E2FH         LINE#         36
-  C:0E32H         LINE#         37
-  C:0E35H         LINE#         38
-  C:0E38H         LINE#         39
-  C:0E3BH         LINE#         40
-  C:0E3EH         LINE#         41
-  C:0E41H         LINE#         42
-  C:0E43H         LINE#         43
-  C:0E45H         LINE#         44
+  C:0E2FH         LINE#         37
+  C:0E32H         LINE#         38
+  C:0E35H         LINE#         39
+  C:0E38H         LINE#         40
+  C:0E3BH         LINE#         41
+  C:0E3EH         LINE#         42
+  C:0E41H         LINE#         43
+  C:0E43H         LINE#         44
+  C:0E45H         LINE#         45
   -------         ENDPROC       UART_1_INIT
   -------         PROC          UART_3_INIT
-  C:0E46H         LINE#         46
   C:0E46H         LINE#         47
   C:0E46H         LINE#         48
-  C:0E49H         LINE#         49
-  C:0E4CH         LINE#         50
-  C:0E4FH         LINE#         51
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:23:48  PAGE 5
+  C:0E46H         LINE#         49
+  C:0E49H         LINE#         50
+  C:0E4CH         LINE#         51
+  C:0E4FH         LINE#         52
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:32:32  PAGE 5
 
 
-  C:0E52H         LINE#         52
-  C:0E55H         LINE#         53
-  C:0E58H         LINE#         54
+  C:0E52H         LINE#         53
+  C:0E55H         LINE#         54
+  C:0E58H         LINE#         55
   -------         ENDPROC       UART_3_INIT
   -------         PROC          _SEND_DATA_UART_1
   D:005FH         SYMBOL        source
@@ -252,15 +252,15 @@ SYMBOL TABLE OF MODULE:  .\Objects\stc8g2k64s4 (?C_STARTUP)
   -------         DO            
   D:0006H         SYMBOL        i
   -------         ENDDO         
-  C:0DBCH         LINE#         56
-  C:0DC6H         LINE#         57
-  C:0DC6H         LINE#         59
-  C:0DD8H         LINE#         60
+  C:0DBCH         LINE#         57
+  C:0DC6H         LINE#         58
+  C:0DC6H         LINE#         60
   C:0DD8H         LINE#         61
-  C:0DE7H         LINE#         62
-  C:0DEAH         LINE#         63
-  C:0DECH         LINE#         64
-  C:0DF3H         LINE#         65
+  C:0DD8H         LINE#         62
+  C:0DE7H         LINE#         63
+  C:0DEAH         LINE#         64
+  C:0DECH         LINE#         65
+  C:0DF3H         LINE#         66
   -------         ENDPROC       _SEND_DATA_UART_1
   -------         PROC          _SEND_DATA_UART_3
   D:0058H         SYMBOL        source
@@ -268,71 +268,71 @@ SYMBOL TABLE OF MODULE:  .\Objects\stc8g2k64s4 (?C_STARTUP)
   -------         DO            
   D:005DH         SYMBOL        i
   -------         ENDDO         
-  C:0D3EH         LINE#         67
-  C:0D48H         LINE#         68
-  C:0D48H         LINE#         70
-  C:0D5EH         LINE#         71
+  C:0D3EH         LINE#         68
+  C:0D48H         LINE#         69
+  C:0D48H         LINE#         71
   C:0D5EH         LINE#         72
-  C:0D6FH         LINE#         73
-  C:0D72H         LINE#         74
-  C:0D7CH         LINE#         75
+  C:0D5EH         LINE#         73
+  C:0D6FH         LINE#         74
+  C:0D72H         LINE#         75
+  C:0D7CH         LINE#         76
   -------         ENDPROC       _SEND_DATA_UART_3
   -------         PROC          INT0_ISR
-  C:0E8AH         LINE#         77
-  C:0E8AH         LINE#         80
+  C:0E8AH         LINE#         78
+  C:0E8AH         LINE#         81
   -------         ENDPROC       INT0_ISR
   -------         PROC          TIME4_ISR
-  C:0E8BH         LINE#         82
-  C:0E8BH         LINE#         85
+  C:0E8BH         LINE#         83
+  C:0E8BH         LINE#         86
   -------         ENDPROC       TIME4_ISR
   -------         PROC          UART1_ISR
-  C:0AB5H         LINE#         87
-  C:0AD2H         LINE#         89
-  C:0AD5H         LINE#         90
+  C:0AB5H         LINE#         88
+  C:0AD2H         LINE#         90
   C:0AD5H         LINE#         91
-  C:0AD8H         LINE#         92
-  C:0ADAH         LINE#         93
-  C:0AECH         LINE#         94
+  C:0AD5H         LINE#         92
+  C:0AD8H         LINE#         93
+  C:0ADAH         LINE#         94
   C:0AECH         LINE#         95
-  C:0AF4H         LINE#         96
-  C:0B06H         LINE#         97
+  C:0AECH         LINE#         96
+  C:0AF4H         LINE#         97
   C:0B06H         LINE#         98
-  C:0B18H         LINE#         100
-  C:0B21H         LINE#         101
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:23:48  PAGE 6
+  C:0B06H         LINE#         99
+  C:0B18H         LINE#         101
+  C:0B21H         LINE#         102
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:32:32  PAGE 6
 
 
-  C:0B24H         LINE#         102
   C:0B24H         LINE#         103
   C:0B24H         LINE#         104
   C:0B24H         LINE#         105
+  C:0B24H         LINE#         106
   -------         ENDPROC       UART1_ISR
   -------         PROC          UART4_ISR
-  C:0E8CH         LINE#         107
-  C:0E8CH         LINE#         110
+  C:0E8CH         LINE#         108
+  C:0E8CH         LINE#         111
   -------         ENDPROC       UART4_ISR
   -------         PROC          DELAY1MS
   -------         DO            
   D:0007H         SYMBOL        i
   D:0006H         SYMBOL        j
   -------         ENDDO         
-  C:0E78H         LINE#         112
   C:0E78H         LINE#         113
-  C:0E78H         LINE#         116
-  C:0E79H         LINE#         117
-  C:0E7AH         LINE#         118
-  C:0E7CH         LINE#         119
-  C:0E7EH         LINE#         121
+  C:0E78H         LINE#         114
+  C:0E78H         LINE#         117
+  C:0E79H         LINE#         118
+  C:0E7AH         LINE#         119
+  C:0E7CH         LINE#         120
   C:0E7EH         LINE#         122
-  C:0E80H         LINE#         123
-  C:0E82H         LINE#         124
+  C:0E7EH         LINE#         123
+  C:0E80H         LINE#         124
+  C:0E82H         LINE#         125
   -------         ENDPROC       DELAY1MS
   -------         PROC          INIT
-  C:0E69H         LINE#         132
   C:0E69H         LINE#         133
   C:0E69H         LINE#         134
-  C:0E72H         LINE#         135
-  C:0E75H         LINE#         136
+  C:0E69H         LINE#         135
+  C:0E72H         LINE#         136
+  C:0E75H         LINE#         137
   -------         ENDPROC       INIT
   -------         PROC          _SEND_KEY_CODE
   D:003DH         SYMBOL        key_code
@@ -340,32 +340,31 @@ SYMBOL TABLE OF MODULE:  .\Objects\stc8g2k64s4 (?C_STARTUP)
   D:003FH         SYMBOL        key_down
   D:0047H         SYMBOL        key_up
   -------         ENDDO         
-  C:0C62H         LINE#         142
-  C:0C66H         LINE#         143
+  C:0C62H         LINE#         143
   C:0C66H         LINE#         144
-  C:0C79H         LINE#         145
-  C:0C8CH         LINE#         146
-  C:0C8FH         LINE#         147
-  C:0C9CH         LINE#         148
-  C:0C9FH         LINE#         149
+  C:0C66H         LINE#         145
+  C:0C79H         LINE#         146
+  C:0C8CH         LINE#         147
+  C:0C8FH         LINE#         148
+  C:0C9CH         LINE#         149
+  C:0C9FH         LINE#         150
   -------         ENDPROC       _SEND_KEY_CODE
   -------         PROC          _EXECUTE
   D:0068H         SYMBOL        source
-  C:0B3FH         LINE#         155
-  C:0B45H         LINE#         156
+  C:0B3FH         LINE#         156
   C:0B45H         LINE#         157
-  C:0B51H         LINE#         158
+  C:0B45H         LINE#         158
   C:0B51H         LINE#         159
   C:0B51H         LINE#         160
-  C:0B53H         LINE#         161
-  C:0B5BH         LINE#         162
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:23:48  PAGE 7
+  C:0B51H         LINE#         161
+  C:0B53H         LINE#         162
+  C:0B5BH         LINE#         163
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:32:32  PAGE 7
 
 
-  C:0B63H         LINE#         163
-  C:0B6EH         LINE#         164
+  C:0B63H         LINE#         164
   C:0B6EH         LINE#         165
-  C:0B70H         LINE#         166
+  C:0B6EH         LINE#         166
   C:0B70H         LINE#         167
   C:0B70H         LINE#         168
   C:0B70H         LINE#         169
@@ -373,28 +372,29 @@ SYMBOL TABLE OF MODULE:  .\Objects\stc8g2k64s4 (?C_STARTUP)
   C:0B70H         LINE#         171
   C:0B70H         LINE#         172
   C:0B70H         LINE#         173
-  C:0B82H         LINE#         174
-  C:0B8DH         LINE#         175
-  C:0B90H         LINE#         176
-  C:0B92H         LINE#         177
-  C:0BA2H         LINE#         178
-  C:0BAFH         LINE#         179
+  C:0B70H         LINE#         174
+  C:0B82H         LINE#         175
+  C:0B8DH         LINE#         176
+  C:0B90H         LINE#         177
+  C:0B92H         LINE#         178
+  C:0BA2H         LINE#         179
   C:0BAFH         LINE#         180
   C:0BAFH         LINE#         181
+  C:0BAFH         LINE#         182
   -------         ENDPROC       _EXECUTE
   -------         PROC          _DELAY_N_MS
   D:0004H         SYMBOL        n
   -------         DO            
   D:0002H         SYMBOL        i
   -------         ENDDO         
-  C:0DF4H         LINE#         183
-  C:0DF8H         LINE#         184
+  C:0DF4H         LINE#         184
   C:0DF8H         LINE#         185
-  C:0DFBH         LINE#         186
-  C:0E08H         LINE#         187
+  C:0DF8H         LINE#         186
+  C:0DFBH         LINE#         187
   C:0E08H         LINE#         188
-  C:0E0BH         LINE#         189
-  C:0E12H         LINE#         190
+  C:0E08H         LINE#         189
+  C:0E0BH         LINE#         190
+  C:0E12H         LINE#         191
   -------         ENDPROC       _DELAY_N_MS
   -------         PROC          _ENCODE
   D:004FH         SYMBOL        src
@@ -405,55 +405,55 @@ SYMBOL TABLE OF MODULE:  .\Objects\stc8g2k64s4 (?C_STARTUP)
   D:0057H         SYMBOL        random_data
   -------         ENDDO         
   -------         ENDDO         
-  C:0BB0H         LINE#         192
-  C:0BB6H         LINE#         193
+  C:0BB0H         LINE#         193
   C:0BB6H         LINE#         194
-  C:0BBBH         LINE#         195
+  C:0BB6H         LINE#         195
   C:0BBBH         LINE#         196
   C:0BBBH         LINE#         197
-  C:0BC2H         LINE#         198
-  C:0BD3H         LINE#         199
-  C:0C01H         LINE#         200
-  C:0C14H         LINE#         201
+  C:0BBBH         LINE#         198
+  C:0BC2H         LINE#         199
+  C:0BD3H         LINE#         200
+  C:0C01H         LINE#         201
+  C:0C14H         LINE#         202
   -------         ENDPROC       _ENCODE
   -------         PROC          _DECODE
   D:0027H         SYMBOL        src
   D:002AH         SYMBOL        dst
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:23:48  PAGE 8
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:32:32  PAGE 8
 
 
   -------         DO            
   D:0006H         SYMBOL        index
   -------         ENDDO         
-  C:0D7DH         LINE#         203
-  C:0D83H         LINE#         204
+  C:0D7DH         LINE#         204
   C:0D83H         LINE#         205
-  C:0D86H         LINE#         206
+  C:0D83H         LINE#         206
   C:0D86H         LINE#         207
   C:0D86H         LINE#         208
-  C:0DB0H         LINE#         209
-  C:0DBBH         LINE#         210
+  C:0D86H         LINE#         209
+  C:0DB0H         LINE#         210
+  C:0DBBH         LINE#         211
   -------         ENDPROC       _DECODE
   -------         PROC          ADD_MESSAGE_TO_LIST
   D:0032H         SYMBOL        msg
   -------         DO            
   D:003AH         SYMBOL        tmp
   -------         ENDDO         
-  C:0CACH         LINE#         212
   C:0CACH         LINE#         213
   C:0CACH         LINE#         214
-  C:0CB2H         LINE#         215
+  C:0CACH         LINE#         215
   C:0CB2H         LINE#         216
-  C:0CBAH         LINE#         217
-  C:0CBBH         LINE#         219
+  C:0CB2H         LINE#         217
+  C:0CBAH         LINE#         218
   C:0CBBH         LINE#         220
-  C:0CC4H         LINE#         221
-  C:0CD4H         LINE#         222
+  C:0CBBH         LINE#         221
+  C:0CC4H         LINE#         222
   C:0CD4H         LINE#         223
-  C:0CDAH         LINE#         224
-  C:0CDCH         LINE#         225
-  C:0CF4H         LINE#         226
+  C:0CD4H         LINE#         224
+  C:0CDAH         LINE#         225
+  C:0CDCH         LINE#         226
   C:0CF4H         LINE#         227
+  C:0CF4H         LINE#         228
   -------         ENDPROC       ADD_MESSAGE_TO_LIST
   -------         PROC          _ADD_NEW_MESSAGE
   D:0027H         SYMBOL        msg_data
@@ -461,31 +461,31 @@ SYMBOL TABLE OF MODULE:  .\Objects\stc8g2k64s4 (?C_STARTUP)
   D:002AH         SYMBOL        msg
   D:0006H         SYMBOL        i
   -------         ENDDO         
-  C:0CF5H         LINE#         229
-  C:0CFBH         LINE#         230
-  C:0CFBH         LINE#         233
-  C:0CFEH         LINE#         234
+  C:0CF5H         LINE#         230
+  C:0CFBH         LINE#         231
+  C:0CFBH         LINE#         234
   C:0CFEH         LINE#         235
-  C:0D12H         LINE#         236
-  C:0D1DH         LINE#         237
-  C:0D26H         LINE#         238
-  C:0D2BH         LINE#         239
+  C:0CFEH         LINE#         236
+  C:0D12H         LINE#         237
+  C:0D1DH         LINE#         238
+  C:0D26H         LINE#         239
+  C:0D2BH         LINE#         240
   -------         ENDPROC       _ADD_NEW_MESSAGE
   -------         PROC          MAIN
-  C:0E13H         LINE#         244
   C:0E13H         LINE#         245
   C:0E13H         LINE#         246
-  C:0E16H         LINE#         248
-  C:0E19H         LINE#         250
+  C:0E13H         LINE#         247
+  C:0E16H         LINE#         249
   C:0E19H         LINE#         251
   C:0E19H         LINE#         252
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:23:48  PAGE 9
+  C:0E19H         LINE#         253
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:32:32  PAGE 9
 
 
-  C:0E20H         LINE#         253
-  C:0E23H         LINE#         254
-  C:0E2AH         LINE#         255
-  C:0E2DH         LINE#         266
+  C:0E20H         LINE#         254
+  C:0E23H         LINE#         255
+  C:0E2AH         LINE#         256
+  C:0E2DH         LINE#         267
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
@@ -539,7 +539,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\stc8g2k64s4 (?C_STARTUP)
   C:0A0BH         PUBLIC        ?C?PLDPDATA
   -------         ENDMOD        ?C?PLDPDATA
 
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:23:48  PAGE 10
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  07/31/2021  18:32:32  PAGE 10
 
 
   -------         MODULE        ?C?PSTPDATA

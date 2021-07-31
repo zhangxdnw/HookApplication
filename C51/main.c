@@ -5,12 +5,14 @@
 #define COMMAND_LENGTH 6
 #define MESSAGE_LENGTH 3
 
+//消息定义
 typedef struct MESSAGE
 {
 	unsigned char command_data[MESSAGE_LENGTH];
 	int done;
   struct message * next;
 }message;
+
 
 //全局变量定义
 unsigned char recv_char = 0;
@@ -21,11 +23,13 @@ unsigned char encode_message[MESSAGE_LENGTH];
 unsigned char return_data[COMMAND_LENGTH];
 message * iterator;
 
-//
+//全局函数声明
 void decode(unsigned char *src, unsigned char *dst);
 void encode(unsigned char *src, unsigned char *dst);
 void add_new_message(unsigned char *msg_data);
 void Delay1ms();
+
+
 //系统定义函数
 
 /***
@@ -43,6 +47,9 @@ void uart_1_init(void)	//115200bps@35MHz
 	EA = 1;	//所有中断开关
 }
 
+/***
+	* 串口3初始化函数
+	*/
 void uart_3_init(void)
 {
 	S3CON = 0x10;		//8位数据,可变波特率
@@ -53,6 +60,9 @@ void uart_3_init(void)
 	AUXR |= 0x10;		//定时器2开始计时
 }
 
+/***
+	* 串口1数据发送
+	*/
 void send_data_uart_1(unsigned char *source, int length)
 {
 	int i;
@@ -64,6 +74,9 @@ void send_data_uart_1(unsigned char *source, int length)
 	}
 }
 
+/***
+	* 串口3数据发送
+	*/
 void send_data_uart_3(unsigned char *source, int length)
 {
 	int i;
@@ -74,16 +87,25 @@ void send_data_uart_3(unsigned char *source, int length)
 	}
 }
 
+/***
+	* INT0中断，用作放板感应
+	*/
 void int0_isr() interrupt 0
 {
 	
 }
 
+/***
+	* 定时器4中断，放板后定时触发
+	*/
 void time4_isr() interrupt 20
 {
 	
 }
 
+/***
+	* 串口1中断，串口1消息接收
+	*/
 void uart1_isr() interrupt 4
 {
 	if(RI == 1)	//recv
@@ -104,11 +126,17 @@ void uart1_isr() interrupt 4
 	}
 }
 
+/***
+	* 串口4中断，串口4消息接收
+	*/
 void uart4_isr() interrupt 18
 {
 	
 }
 
+/***
+	* 延时函数
+	*/
 void Delay1ms()		//@35MHz
 {
 	unsigned char i, j;
@@ -124,7 +152,6 @@ void Delay1ms()		//@35MHz
 }
 
 //自定义函数
-
 
 /***
 	* 初始化函数
@@ -180,6 +207,9 @@ void execute(unsigned char *source)
 	}
 }
 
+/***
+	* 延时函数n毫秒
+	*/
 void delay_n_ms(int n)
 {
 	int i = 0;
@@ -189,6 +219,9 @@ void delay_n_ms(int n)
 	}
 }
 
+/***
+	* 加密函数 随机产生3字节，与后面消息内容异或加密
+	*/
 void encode(unsigned char *src, unsigned char *dst)
 {
 	int index = 0;
@@ -200,6 +233,9 @@ void encode(unsigned char *src, unsigned char *dst)
 	}
 }
 
+/***
+	* 解密函数，异或解密
+	*/
 void decode(unsigned char *src, unsigned char *dst)
 {
 	int index = 0;
@@ -209,6 +245,9 @@ void decode(unsigned char *src, unsigned char *dst)
 	}
 }
 
+/***
+	* 消息添加到队列函数
+	*/
 void add_message_to_list(message msg)
 {
 	if(iterator == 0)
@@ -226,6 +265,9 @@ void add_message_to_list(message msg)
 	}
 }
 
+/***
+	* 生成新消息函数
+	*/
 void add_new_message(unsigned char * msg_data)
 {
 	message msg;
@@ -239,29 +281,23 @@ void add_new_message(unsigned char * msg_data)
 	add_message_to_list(msg);
 }
 
-unsigned char key[8];
-
+/***
+	* 主函数
+	*/
 void main()
 {
 	init();
 	
-	key[0] = 0x41;
-	
 	while(1)
 	{
-		delay_n_ms(100);
-		SBUF = 0x30;
-		delay_n_ms(10);
-		S3BUF = 0x41;
-		
-//		if(iterator != 0)
-//		{
-//			if(iterator->done == 0)
-//			{
-//				execute(iterator->command_data);
-//				iterator->done = 1;
-//				iterator = iterator->next;
-//			}
-//		}
+		if(iterator != 0)
+		{
+			if(iterator->done == 0)
+			{
+				execute(iterator->command_data);
+				iterator->done = 1;
+				iterator = iterator->next;
+			}
+		}
 	}
 }
