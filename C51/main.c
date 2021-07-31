@@ -1,21 +1,267 @@
-#include "reg51.h"
+#include "stc8g.h"
+#include "intrins.h"
+#include "stdio.h"
+
+#define COMMAND_LENGTH 6
+#define MESSAGE_LENGTH 3
+
+typedef struct MESSAGE
+{
+	unsigned char command_data[MESSAGE_LENGTH];
+	int done;
+  struct message * next;
+}message;
+
+//È«¾Ö±äÁ¿¶¨Òå
+unsigned char recv_char = 0;
+char recv_count = 0;
+unsigned char origin_command[COMMAND_LENGTH];
+unsigned char decode_message[MESSAGE_LENGTH];
+unsigned char encode_message[MESSAGE_LENGTH];
+unsigned char return_data[COMMAND_LENGTH];
+message * iterator;
+
+//
+void decode(unsigned char *src, unsigned char *dst);
+void encode(unsigned char *src, unsigned char *dst);
+void add_new_message(unsigned char *msg_data);
+void Delay1ms();
+//ÏµÍ³¶¨Òåº¯Êı
+
 /***
-  * PINå®šä¹‰
-  * ä½¿ç”¨INT3ä½œä¸ºå‹ä¸‹æ„Ÿåº”ä¸­æ–­è§¦å‘ï¼Œæ”¶åˆ°è§¦å‘10ç§’åï¼Œä½¿ç”¨ä¸²å£2ä¸CH9328é€šä¿¡
-  * ä½¿ç”¨ä¸²å£1ä¸ä¸Šä½æœºé€šä¿¡
-  * ä½¿ç”¨ä¸²å£3ä¸LD3320é€šä¿¡ï¼Œæ”¶åˆ°è§¦å‘åè½¬å‘ç»™ä¸Šä½æœº
-  
-  * åè®®
-  * ä¸Šä½æœºä¸‹å‘
-  * 1. è¯»å–ç¬¬Né€šé“çš„ADCç”µå‹
-  * 01 
-  * 2. æ£€æµ‹è¯­éŸ³ä¿¡å·
-  * 02
-  * 3. è®¾ç½®æŒ‰é”®è§¦å‘å»¶æ—¶
-  * 03
-  */
+	* ´®¿Ú1³õÊ¼»¯º¯Êı
+	*/
+void uart_1_init(void)	//115200bps@35MHz	
+{
+	SCON = 0x50;		//8Î»Êı¾İ,¿É±ä²¨ÌØÂÊ
+	AUXR |= 0x01;		//´®¿Ú1Ñ¡Ôñ¶¨Ê±Æ÷2Îª²¨ÌØÂÊ·¢ÉúÆ÷
+	AUXR |= 0x04;		//¶¨Ê±Æ÷Ê±ÖÓ1TÄ£Ê½
+	T2L = 0xB4;		//ÉèÖÃ¶¨Ê±³õÊ¼Öµ
+	T2H = 0xFF;		//ÉèÖÃ¶¨Ê±³õÊ¼Öµ
+	AUXR |= 0x10;		//¶¨Ê±Æ÷2¿ªÊ¼¼ÆÊ±
+	ES = 1;	//´®¿Ú1ÖĞ¶Ï¿ª¹Ø
+	EA = 1;	//ËùÓĞÖĞ¶Ï¿ª¹Ø
+}
+
+void uart_3_init(void)
+{
+	S3CON = 0x10;		//8Î»Êı¾İ,¿É±ä²¨ÌØÂÊ
+	S3CON &= 0xBF;		//´®¿Ú3Ñ¡Ôñ¶¨Ê±Æ÷2Îª²¨ÌØÂÊ·¢ÉúÆ÷
+	AUXR |= 0x04;		//¶¨Ê±Æ÷Ê±ÖÓ1TÄ£Ê½
+	T2L = 0xB4;		//ÉèÖÃ¶¨Ê±³õÊ¼Öµ
+	T2H = 0xFF;		//ÉèÖÃ¶¨Ê±³õÊ¼Öµ
+	AUXR |= 0x10;		//¶¨Ê±Æ÷2¿ªÊ¼¼ÆÊ±
+}
+
+void send_data_uart_1(unsigned char *source, int length)
+{
+	int i;
+	for(i =0;i<length;i++)
+	{
+		SBUF = *(source+i);
+		while(!TI);
+		TI = 0;
+	}
+}
+
+void send_data_uart_3(unsigned char *source, int length)
+{
+	int i;
+	for(i =0;i<length;i++)
+	{
+		S3BUF = *(source+i);
+		Delay1ms();
+	}
+}
+
+void int0_isr() interrupt 0
+{
+	
+}
+
+void time4_isr() interrupt 20
+{
+	
+}
+
+void uart1_isr() interrupt 4
+{
+	if(RI == 1)	//recv
+	{
+		recv_char = SBUF;
+		RI = 0;
+		if(recv_count<COMMAND_LENGTH)
+		{
+			origin_command[recv_count++] = recv_char;
+			if(recv_count >= COMMAND_LENGTH)
+			{
+				decode(origin_command, decode_message);
+				//send_data_uart_1(decode_message, MESSAGE_LENGTH);
+				add_new_message(decode_message);
+				recv_count = 0;
+			}
+		}
+	}
+}
+
+void uart4_isr() interrupt 18
+{
+	
+}
+
+void Delay1ms()		//@35MHz
+{
+	unsigned char i, j;
+
+	_nop_();
+	_nop_();
+	i = 46;
+	j = 113;
+	do
+	{
+		while (--j);
+	} while (--i);
+}
+
+//×Ô¶¨Òåº¯Êı
+
+
+/***
+	* ³õÊ¼»¯º¯Êı
+	*/
+void init()
+{
+	iterator = 0;
+	uart_1_init();	//´®¿Ú1³õÊ¼»¯
+	uart_3_init();	//´®¿Ú1³õÊ¼»¯
+}
+
+/***
+	* ·¢ËÍ°´¼üÏûÏ¢¸ø°´¼ü°å
+	*/
+void send_key_code(int key_code)
+{
+	unsigned char key_down[8] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+	unsigned char key_up[8] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+	key_down[2] = key_code;
+	send_data_uart_3(key_down, 8);
+	Delay1ms();
+	send_data_uart_3(key_up, 8);
+}
+
+/***
+	* ÃüÁîÖ´ĞĞº¯Êı
+	*/
+void execute(unsigned char *source)
+{
+	switch(*source)
+	{
+		case 0x01:	//ÎÕÊÖ£¬Ô­Êı¾İ·µ»Ø
+			encode_message[0] = *source;
+			encode_message[1] = *(source+1);
+			encode_message[2] = *(source+2);
+			encode(encode_message, return_data);
+			send_data_uart_1(return_data, COMMAND_LENGTH);
+			break;
+		case 0x02:	//¶ÁÈ¡µ¥Æ¬»úĞÅÏ¢
+			break;
+		case 0x03:	//¶ÁÈ¡ADCÖ¸¶¨Í¨µÀµçÑ¹
+			break;
+		case 0x04:	//Ê¶±ğÓïÒô
+			break;
+		case 0x05:	//·¢ËÍÖ¸¶¨°´¼ü
+			send_key_code(*(source+1));
+			encode_message[0] = *source;
+			encode_message[1] = 0x00;
+			encode_message[2] = 0x00;
+			encode(encode_message, return_data);
+			send_data_uart_1(return_data, COMMAND_LENGTH);
+			break;
+	}
+}
+
+void delay_n_ms(int n)
+{
+	int i = 0;
+	for(i;i<n;i++)
+	{
+		Delay1ms();
+	}
+}
+
+void encode(unsigned char *src, unsigned char *dst)
+{
+	int index = 0;
+	for(index; index < MESSAGE_LENGTH; index++)
+	{
+		unsigned char random_data = rand()>>8;
+		*(dst+index) = random_data;
+		*(dst+index + MESSAGE_LENGTH) = * (src + index) ^ *(dst+index);
+	}
+}
+
+void decode(unsigned char *src, unsigned char *dst)
+{
+	int index = 0;
+	for(index; index < MESSAGE_LENGTH; index++)
+	{
+		*(dst+index) = *(src+index) ^ * (src+index+MESSAGE_LENGTH);
+	}
+}
+
+void add_message_to_list(message msg)
+{
+	if(iterator == 0)
+	{
+		iterator = &msg;
+	}
+	else
+	{
+		message *tmp = iterator;
+		while(tmp->next != 0)
+		{
+			tmp = tmp->next;
+		}
+		tmp->next = &msg;
+	}
+}
+
+void add_new_message(unsigned char * msg_data)
+{
+	message msg;
+	int i;
+	for(i = 0; i < MESSAGE_LENGTH; i++)
+	{
+		msg.command_data[i] = *(msg_data + i);
+	}
+	msg.next = 0;
+	msg.done = 0;
+	add_message_to_list(msg);
+}
+
+unsigned char key[8];
 
 void main()
 {
-  
+	init();
+	
+	key[0] = 0x41;
+	
+	while(1)
+	{
+		delay_n_ms(100);
+		SBUF = 0x30;
+		delay_n_ms(10);
+		S3BUF = 0x41;
+		
+//		if(iterator != 0)
+//		{
+//			if(iterator->done == 0)
+//			{
+//				execute(iterator->command_data);
+//				iterator->done = 1;
+//				iterator = iterator->next;
+//			}
+//		}
+	}
 }
