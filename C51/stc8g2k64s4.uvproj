@@ -233,7 +233,7 @@
               <RCB>
                 <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x10000</Size>
+                <Size>0xffff</Size>
               </RCB>
               <RXB>
                 <Type>0</Type>
@@ -385,6 +385,36 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>ADC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ADC.c</FilePath>
+            </File>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>UART.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UART.C</FilePath>
+            </File>
+            <File>
+              <FileName>Exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>GPIO.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\GPIO.c</FilePath>
             </File>
           </Files>
         </Group>
