@@ -57,7 +57,7 @@ void	GPIO_config(void)
 	
 	//ADC 0-14 P1.0~P1.7 P0.0~P0.7
 	GPIO_InitStructure.Pin  = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;		//指定要初始化的IO, GPIO_Pin_0 ~ GPIO_Pin_7
-	GPIO_InitStructure.Mode = GPIO_PullUp;	//指定IO的输入或输出方式,GPIO_PullUp,GPIO_HighZ,GPIO_OUT_OD,GPIO_OUT_PP
+	GPIO_InitStructure.Mode = GPIO_HighZ;	//指定IO的输入或输出方式,GPIO_PullUp,GPIO_HighZ,GPIO_OUT_OD,GPIO_OUT_PP
 	GPIO_Inilize(GPIO_P1,&GPIO_InitStructure);	//初始化
 	//GPIO_Inilize(GPIO_P0,&GPIO_InitStructure);	//初始化
 }
@@ -167,6 +167,7 @@ void timer0_int (void) interrupt TIMER0_VECTOR
 	if(timer0_count++ >= 65 * 40)		//经验值65大概100ms
 	{
 		timer0_count = 0;
+		TX1_write2buff(0xAA);
 		Timer0_Stop();
 	}
 }
@@ -233,9 +234,9 @@ void execute(u8 *source)
 			encode_message[1] = decode_message[1];
 			encode_message[2] = adc_value>>8;
 			encode_message[3] = (u8)adc_value;
-			//send_data_uart_1(encode_message, MESSAGE_LENGTH);
-			encode(encode_message, return_data, *source);
-			send_data_uart_1(return_data, COMMAND_LENGTH);
+			send_data_uart_1(encode_message, MESSAGE_LENGTH);
+//			encode(encode_message, return_data, *source);
+//			send_data_uart_1(return_data, COMMAND_LENGTH);
 			ADC_PowerControl(DISABLE);							//单独的ADC电源操作函数, ENABLE或DISABLE
 			break;
 		case 0x04:	//识别语音
